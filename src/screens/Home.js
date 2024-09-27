@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Linking } from 'react-native'
 import {
   Layout,
   Button,
@@ -17,29 +17,29 @@ const Home = ({ navigation }) => {
 
   return (
     <Layout>
-      <TopNav
-        middleContent='Home'
-        rightContent={
-          <Ionicons
-            name={isDarkmode ? 'sunny' : 'moon'}
-            size={20}
-            color={isDarkmode ? themeColor.white : themeColor.black}
-          />
-        }
-        rightAction={() => {
-          isDarkmode ? setTheme('light') : setTheme('dark')
-        }}
-      />
       <View style={styles.root}>
         <Section>
           <SectionContent>
-            <Text style={styles.text}>These components are from Rapi UI</Text>
+            <Text style={styles.text}>Components made with Rapi UI</Text>
             <Button
-              text='Go To Second Screen '
+              text='Rapi Docs'
+              style={styles.button}
               status='info'
-              size='md'
-              style={{ marginTop: 10 }}
+              onPress={() => Linking.openURL('https://rapi-ui.kikiding.space/')}
+            />
+            <Button
+              text='Go to second screen'
+              style={styles.button}
               onPress={() => navigation.navigate('SecondScreen')}
+              status='success'
+            />
+            <Button
+              text={isDarkmode ? 'Light Mode' : 'Dark Mode'}
+              style={styles.button}
+              status={isDarkmode ? 'success' : 'danger'}
+              onPress={() =>
+                isDarkmode ? setTheme('light') : setTheme('dark')
+              }
             />
           </SectionContent>
         </Section>
@@ -53,8 +53,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal: 20,
   },
   text: { fontWeight: 'bold', textAlign: 'center' },
+  button: {
+    marginTop: 20,
+  },
 })
 
 export default Home
